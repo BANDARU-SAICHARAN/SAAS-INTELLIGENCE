@@ -1,24 +1,96 @@
-import { Bell, Search } from "lucide-react";
+"use client";
+
+import { Bell, Menu, Search } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <div className="h-16 border-b flex items-center justify-between px-6">
-      <div className="flex items-center gap-3">
-        <Search size={18} />
-        <input
-          type="text"
-          placeholder="Search leads..."
-          className="outline-none"
-        />
-      </div>
+    <header className="sticky top-0 z-50 backdrop-blur-2xl bg-slate-950/70 border-b border-white/10">
+      <div className="h-16 px-8 flex items-center justify-between">
 
-      <div className="flex items-center gap-5">
-        <Bell size={20} />
+        {/* Left */}
 
-        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
-          C
+        <div className="flex items-center gap-5">
+
+          <button className="p-2 rounded-xl hover:bg-white/10 transition">
+            <Menu size={22} />
+          </button>
+
+          <div className="relative">
+
+            <Search
+              size={18}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+
+            <input
+              type="text"
+              placeholder="Search companies, leads..."
+              className="
+              w-[340px]
+              rounded-2xl
+              border
+              border-white/10
+              bg-white/5
+              backdrop-blur-xl
+              py-3
+              pl-11
+              pr-4
+              text-sm
+              outline-none
+              transition
+              focus:border-cyan-400
+              focus:ring-2
+              focus:ring-cyan-400/20
+              placeholder:text-slate-500
+              "
+            />
+
+          </div>
+
         </div>
+
+        {/* Right */}
+
+        <div className="flex items-center gap-4">
+
+          <button
+            className="
+            relative
+            rounded-2xl
+            border
+            border-white/10
+            bg-white/5
+            p-3
+            hover:bg-white/10
+            transition
+            "
+          >
+            <Bell size={18} />
+
+            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-cyan-400"></span>
+          </button>
+
+          <div
+            className="
+            flex
+            h-11
+            w-11
+            items-center
+            justify-center
+            rounded-2xl
+            bg-gradient-to-br
+            from-cyan-500
+            to-blue-600
+            font-semibold
+            shadow-lg
+            "
+          >
+            C
+          </div>
+
+        </div>
+
       </div>
-    </div>
+    </header>
   );
 }

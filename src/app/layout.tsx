@@ -1,35 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const geist = Geist({
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "AI Sales Intelligence",
-  description: "AI-powered Sales Intelligence SaaS",
+  description: "AI-powered Sales Intelligence Platform",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <TooltipProvider>
-          {children}
-        </TooltipProvider>
+      <body
+        className={`${geist.className} antialiased bg-[#060816] text-white`}
+      >
+        <ClerkProvider>
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
