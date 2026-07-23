@@ -1,10 +1,11 @@
 import { prisma } from "@/lib/prisma";
+import type { Lead } from "@prisma/client";
 import Link from "next/link";
 import { Search, Plus } from "lucide-react";
 import LeadActions from "@/components/leads/LeadActions";
 
 export default async function LeadsPage() {
-  const leads = await prisma.lead.findMany({
+  const leads: Lead[] = await prisma.lead.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -49,40 +50,18 @@ export default async function LeadsPage() {
       {/* Table */}
       <div className="overflow-x-auto rounded-3xl border border-slate-800 bg-slate-900">
         <table className="min-w-[1400px] w-full">
-
           <thead className="border-b border-slate-700 bg-slate-800">
             <tr>
-              <th className="px-6 py-4 text-left text-slate-300">
-                Company
-              </th>
-
-              <th className="px-6 py-4 text-left text-slate-300">
-                Website
-              </th>
-
-              <th className="px-6 py-4 text-left text-slate-300">
-                Industry
-              </th>
-
-              <th className="px-6 py-4 text-left text-slate-300">
-                Score
-              </th>
-
-              <th className="px-6 py-4 text-left text-slate-300">
-                Status
-              </th>
-
-              <th className="px-6 py-4 text-left text-slate-300">
-                Summary
-              </th>
-
-              <th className="px-6 py-4 text-left text-slate-300">
-                Created
-              </th>
-
+              <th className="px-6 py-4 text-left text-slate-300">Company</th>
+              <th className="px-6 py-4 text-left text-slate-300">Website</th>
+              <th className="px-6 py-4 text-left text-slate-300">Industry</th>
+              <th className="px-6 py-4 text-left text-slate-300">Score</th>
+              <th className="px-6 py-4 text-left text-slate-300">Status</th>
+              <th className="px-6 py-4 text-left text-slate-300">Summary</th>
+              <th className="px-6 py-4 text-left text-slate-300">Created</th>
               <th className="w-40 px-6 py-4 text-center text-slate-300">
-  Actions
-</th>
+                Actions
+              </th>
             </tr>
           </thead>
 
@@ -97,7 +76,7 @@ export default async function LeadsPage() {
                 </td>
               </tr>
             ) : (
-              leads.map((lead) => (
+              leads.map((lead: Lead) => (
                 <tr
                   key={lead.id}
                   className="border-b border-slate-800 hover:bg-slate-800/40"
@@ -155,9 +134,9 @@ export default async function LeadsPage() {
                     {lead.createdAt.toLocaleDateString()}
                   </td>
 
-               <td className="w-40 px-6 py-5">
-  <LeadActions id={lead.id} />
-</td>
+                  <td className="w-40 px-6 py-5">
+                    <LeadActions id={lead.id} />
+                  </td>
                 </tr>
               ))
             )}
