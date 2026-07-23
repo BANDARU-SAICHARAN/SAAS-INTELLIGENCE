@@ -1,95 +1,136 @@
 "use client";
 
-import { Bell, Menu, Search } from "lucide-react";
+import { Bell, Search, Sparkles, Plus } from "lucide-react";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-2xl bg-slate-950/70 border-b border-white/10">
-      <div className="h-16 px-8 flex items-center justify-between">
-
+    <header className="sticky top-0 z-50 border-b border-slate-800/60 bg-slate-950/70 backdrop-blur-3xl">
+      <div className="flex h-20 items-center justify-between px-8">
         {/* Left */}
-
-        <div className="flex items-center gap-5">
-
-          <button className="p-2 rounded-xl hover:bg-white/10 transition">
-            <Menu size={22} />
-          </button>
-
+        <div className="flex items-center gap-4">
+          {/* Search */}
           <div className="relative">
-
             <Search
               size={18}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"
             />
 
             <input
               type="text"
               placeholder="Search companies, leads..."
               className="
-              w-[340px]
-              rounded-2xl
-              border
-              border-white/10
-              bg-white/5
-              backdrop-blur-xl
-              py-3
-              pl-11
-              pr-4
-              text-sm
-              outline-none
-              transition
-              focus:border-cyan-400
-              focus:ring-2
-              focus:ring-cyan-400/20
-              placeholder:text-slate-500
+                w-[420px]
+                max-w-full
+                rounded-2xl
+                border
+                border-slate-800
+                bg-slate-900/60
+                py-3
+                pl-11
+                pr-4
+                text-sm
+                text-white
+                outline-none
+                transition-all
+                duration-300
+                placeholder:text-slate-500
+                hover:border-slate-700
+                focus:border-cyan-400
+                focus:ring-4
+                focus:ring-cyan-500/10
               "
             />
-
           </div>
 
+          {/* AI Assistant */}
+          <button
+            className="
+              hidden
+              lg:flex
+              items-center
+              gap-2
+              rounded-2xl
+              border
+              border-cyan-500/20
+              bg-cyan-500/10
+              px-4
+              py-3
+              text-sm
+              font-medium
+              text-cyan-300
+              transition-all
+              hover:bg-cyan-500/20
+              hover:shadow-lg
+              hover:shadow-cyan-500/20
+            "
+          >
+            <Sparkles size={16} />
+            AI Assistant
+          </button>
         </div>
 
         {/* Right */}
-
         <div className="flex items-center gap-4">
-
+          {/* New Lead */}
           <button
             className="
-            relative
-            rounded-2xl
-            border
-            border-white/10
-            bg-white/5
-            p-3
-            hover:bg-white/10
-            transition
+              hidden
+              lg:flex
+              items-center
+              gap-2
+              rounded-2xl
+              bg-gradient-to-r
+              from-cyan-500
+              to-blue-600
+              px-4
+              py-3
+              text-sm
+              font-semibold
+              text-white
+              transition-all
+              hover:scale-105
+              hover:shadow-xl
+              hover:shadow-cyan-500/30
             "
           >
-            <Bell size={18} />
-
-            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-cyan-400"></span>
+            <Plus size={16} />
+            New Lead
           </button>
 
-          <div
+          {/* Notifications */}
+          <button
             className="
-            flex
-            h-11
-            w-11
-            items-center
-            justify-center
-            rounded-2xl
-            bg-gradient-to-br
-            from-cyan-500
-            to-blue-600
-            font-semibold
-            shadow-lg
+              relative
+              rounded-2xl
+              border
+              border-slate-800
+              bg-slate-900/60
+              p-3
+              transition-all
+              duration-300
+              hover:border-cyan-500/40
+              hover:bg-slate-800
+              hover:shadow-lg
+              hover:shadow-cyan-500/20
             "
           >
-            C
+            <Bell size={18} className="text-slate-300" />
+            <span className="absolute right-2 top-2 h-2.5 w-2.5 animate-pulse rounded-full bg-cyan-400" />
+          </button>
+
+          {/* Profile */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-1">
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox:
+                    "h-10 w-10 rounded-xl ring-2 ring-cyan-500/20 hover:ring-cyan-400 transition-all",
+                },
+              }}
+            />
           </div>
-
         </div>
-
       </div>
     </header>
   );
