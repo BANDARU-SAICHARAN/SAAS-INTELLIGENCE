@@ -1,13 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { Search, Plus } from "lucide-react";
 import LeadActions from "@/components/leads/LeadActions";
 
-type Lead = Prisma.LeadGetPayload<{}>;
-
 export default async function LeadsPage() {
-  const leads: Lead[] = await prisma.lead.findMany({
+  const leads = await prisma.lead.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -15,7 +12,6 @@ export default async function LeadsPage() {
 
   return (
     <div className="mx-auto max-w-7xl p-8">
-      {/* Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-4xl font-bold text-white">
@@ -36,7 +32,6 @@ export default async function LeadsPage() {
         </Link>
       </div>
 
-      {/* Search */}
       <div className="mb-6">
         <div className="flex items-center gap-3 rounded-2xl border border-slate-700 bg-slate-900 px-5 py-4">
           <Search size={18} className="text-slate-500" />
@@ -49,7 +44,6 @@ export default async function LeadsPage() {
         </div>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto rounded-3xl border border-slate-800 bg-slate-900">
         <table className="min-w-[1400px] w-full">
           <thead className="border-b border-slate-700 bg-slate-800">
@@ -94,12 +88,12 @@ export default async function LeadsPage() {
                       rel="noopener noreferrer"
                       className="text-cyan-400 hover:underline"
                     >
-                      {lead.website}
+                      {lead.website ?? "-"}
                     </a>
                   </td>
 
                   <td className="px-6 py-5 text-slate-300">
-                    {lead.industry}
+                    {lead.industry ?? "-"}
                   </td>
 
                   <td className="px-6 py-5">
@@ -130,10 +124,9 @@ export default async function LeadsPage() {
 
                   <td className="max-w-sm truncate px-6 py-5 text-slate-300">
                     {lead.summary}
-                  </td>
-
-                  <td className="px-6 py-5 text-slate-400">
-                    {lead.createdAt.toLocaleDateString()}
+                  </td> 
+                                    <td className="px-6 py-5 text-slate-400">
+                    {new Date(lead.createdAt).toLocaleDateString()}
                   </td>
 
                   <td className="px-6 py-5 text-center">
