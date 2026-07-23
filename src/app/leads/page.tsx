@@ -1,11 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import type { Lead } from "@prisma/client";
 import Link from "next/link";
 import { Search, Plus } from "lucide-react";
 import LeadActions from "@/components/leads/LeadActions";
 
 export default async function LeadsPage() {
-  const leads: Lead[] = await prisma.lead.findMany({
+  const leads = await prisma.lead.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -59,7 +58,7 @@ export default async function LeadsPage() {
               <th className="px-6 py-4 text-left text-slate-300">Status</th>
               <th className="px-6 py-4 text-left text-slate-300">Summary</th>
               <th className="px-6 py-4 text-left text-slate-300">Created</th>
-              <th className="w-40 px-6 py-4 text-center text-slate-300">
+              <th className="px-6 py-4 text-center text-slate-300">
                 Actions
               </th>
             </tr>
@@ -76,7 +75,7 @@ export default async function LeadsPage() {
                 </td>
               </tr>
             ) : (
-              leads.map((lead: Lead) => (
+              leads.map((lead) => (
                 <tr
                   key={lead.id}
                   className="border-b border-slate-800 hover:bg-slate-800/40"
@@ -134,7 +133,7 @@ export default async function LeadsPage() {
                     {lead.createdAt.toLocaleDateString()}
                   </td>
 
-                  <td className="w-40 px-6 py-5">
+                  <td className="px-6 py-5 text-center">
                     <LeadActions id={lead.id} />
                   </td>
                 </tr>
