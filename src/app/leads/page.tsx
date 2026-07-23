@@ -1,10 +1,13 @@
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { Search, Plus } from "lucide-react";
 import LeadActions from "@/components/leads/LeadActions";
 
+type Lead = Prisma.LeadGetPayload<{}>;
+
 export default async function LeadsPage() {
-  const leads = await prisma.lead.findMany({
+  const leads: Lead[] = await prisma.lead.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -143,7 +146,6 @@ export default async function LeadsPage() {
         </table>
       </div>
 
-      {/* Footer */}
       <div className="mt-6 flex items-center justify-between">
         <p className="text-sm text-slate-400">
           Total Leads:{" "}
